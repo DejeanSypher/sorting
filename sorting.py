@@ -11,8 +11,6 @@ if cmp(a, b) returns  1, then a > b;
 if cmp(a, b) returns  0, then a == b.
 '''
 
-import random
-
 
 def cmp_standard(a, b):
     '''
@@ -158,15 +156,12 @@ def quick_sorted(xs, cmp=cmp_standard):
     '''
     if len(xs) <= 1:
         return xs
-    else:
-        pivot = random.choice(xs)
-        xs.remove(pivot)
-        less_than = [i for i in xs if cmp(i, pivot) < 0]
-        equal_to = [i for i in xs if cmp(i, pivot) == 0]
-        greater_than = [i for i in xs if cmp(i, pivot) > 0]
-        less_than_sorted = quick_sorted(less_than, cmp=cmp)
-        greater_than_sorted = quick_sorted(greater_than, cmp=cmp)
-        return less_than_sorted + equal_to + [pivot] + greater_than_sorted
+    pivot = xs[0]
+    left = [x for x in xs[1:] if cmp(x, pivot) < 0]
+    right = [x for x in xs[1:] if cmp(x, pivot) >= 0]
+    sorted_left = quick_sorted(left, cmp=cmp)
+    sorted_right = quick_sorted(right, cmp=cmp)
+    return _merged(sorted_left, [pivot], sorted_right, cmp=cmp)
 
 
 def quick_sort(xs, cmp=cmp_standard):
