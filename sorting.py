@@ -164,7 +164,7 @@ def quick_sorted(xs, cmp=cmp_standard):
         equal = [x for x in xs if cmp(x, piv) == 0]
         less = quick_sorted(less, cmp=cmp)
         more = quick_sorted(more, cmp=cmp)
-        return less + more + equal
+        return less + equal + more
 
 
 def quick_sort(xs, cmp=cmp_standard):
