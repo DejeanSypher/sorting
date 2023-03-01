@@ -94,9 +94,11 @@ def _merged(xs, ys, cmp=cmp_standard):
         else:
             result.append(ys[j])
             j += 1
+
     while i < len(xs):
         result.append(xs[i])
         i += 1
+
     while j < len(ys):
         result.append(ys[j])
         j += 1
@@ -121,12 +123,13 @@ def merge_sorted(xs, cmp=cmp_standard):
     '''
     if len(xs) == 1:
         return xs
-    mid = len(xs) // 2
-    left = xs[:mid]
-    right = xs[mid:]
-    left_sorted = merge_sorted(left, cmp=cmp)
-    right_sorted = merge_sorted(right, cmp=cmp)
-    return _merged(left_sorted, right_sorted, cmp=cmp)
+    else:
+        mid = len(xs) // 2
+        left = xs[:mid]
+        right = xs[mid:]
+        left_sorted = merge_sorted(left, cmp=cmp)
+        right_sorted = merge_sorted(right, cmp=cmp)
+        return _merged(left_sorted, right_sorted, cmp=cmp)
 
 
 def quick_sorted(xs, cmp=cmp_standard):
@@ -155,14 +158,15 @@ def quick_sorted(xs, cmp=cmp_standard):
     '''
     if len(xs) <= 1:
         return xs
-    pivot = random.choice(xs)
-    xs.remove(pivot)
-    less_than = [i for i in xs if cmp(i, pivot) < 0]
-    equal_to = [i for i in xs if cmp(i, pivot) == 0]
-    greater_than = [i for i in xs if cmp(i, pivot) > 0]
-    less_than_sorted = quick_sorted(less_than, cmp=cmp)
-    greater_than_sorted = quick_sorted(greater_than, cmp=cmp)
-    return less_than_sorted + equal_to + [pivot] + greater_than_sorted
+    else:
+        pivot = random.choice(xs)
+        xs.remove(pivot)
+        less_than = [i for i in xs if cmp(i, pivot) < 0]
+        equal_to = [i for i in xs if cmp(i, pivot) == 0]
+        greater_than = [i for i in xs if cmp(i, pivot) > 0]
+        less_than_sorted = quick_sorted(less_than, cmp=cmp)
+        greater_than_sorted = quick_sorted(greater_than, cmp=cmp)
+        return less_than_sorted + equal_to + [pivot] + greater_than_sorted
 
 
 def quick_sort(xs, cmp=cmp_standard):
