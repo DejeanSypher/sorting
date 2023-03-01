@@ -159,9 +159,9 @@ def quick_sorted(xs, cmp=cmp_standard):
     else:
         mid = len(xs) // 2
         piv = xs[mid]
-        less = [i for i in xs[1:] if cmp(i, piv) < 0]
-        more = [i for i in xs[1:] if cmp(i, piv) >= 0]
-        equal = [i for i in xs[1:] if cmp(i, piv) == 0]
+        less = [i for i in xs if cmp(i, piv) == -1]
+        more = [i for i in xs if cmp(i, piv) == 1]
+        equal = [i for i in xs if cmp(i, piv) == 0]
         less = quick_sorted(less, cmp=cmp)
         more = quick_sorted(more, cmp=cmp)
         return less + more + equal
