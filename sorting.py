@@ -82,9 +82,9 @@ def _merged(xs, ys, cmp=cmp_standard):
     >>> _merged([1, 3, 5], [2, 4, 6])
     [1, 2, 3, 4, 5, 6]
     '''
-    result = []
     i = 0
     j = 0
+    result = []
     while i < len(xs) and j < len(ys):
         if cmp(xs[i], ys[j]) == -1:
             result.append(xs[i])
@@ -123,8 +123,8 @@ def merge_sorted(xs, cmp=cmp_standard):
         return xs
     else:
         mid = len(xs) // 2
-        lef = xs[:mid]
-        rig = xs[mid:]
+        lef = xs[mid:]
+        rig = xs[:mid]
         lef_sorted = merge_sorted(lef, cmp=cmp)
         rig_sorted = merge_sorted(rig, cmp=cmp)
         return _merged(lef_sorted, rig_sorted, cmp=cmp)
